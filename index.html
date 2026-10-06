@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Mimesoft — Sistemas, webs y automatizaciones a medida | Arequipa</title>
+<meta name="description" content="Consultoría de software en Arequipa: sistemas internos a medida, sitios web, automatización de procesos con n8n e integración de WhatsApp Business API.">
+<meta name="keywords" content="desarrollo de software Arequipa, sistemas a medida, automatización n8n, WhatsApp Business API, chatbots, páginas web Perú">
+<meta name="author" content="Miguel Mendoza">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0A0A0B">
+
+<link rel="canonical" href="https://mimesoft.site/">
+
+<!-- Open Graph: las URL tienen que ser absolutas o los scrapers no las
+     resuelven (WhatsApp y LinkedIn no siguen rutas relativas). -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mimesoft">
+<meta property="og:locale" content="es_PE">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:url" content="https://mimesoft.site/">
+<meta property="og:title" content="Mimesoft — Sistemas, webs y automatizaciones a medida">
+<meta property="og:description" content="Consultoría de software en Arequipa: sistemas internos a medida, sitios web, automatización de procesos e integración de WhatsApp Business API.">
+<meta property="og:image" content="https://mimesoft.site/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Mimesoft">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mimesoft — Sistemas, webs y automatizaciones a medida">
+<meta name="twitter:description" content="Consultoría de software en Arequipa: sistemas a medida, sitios web, automatización e integración de WhatsApp Business API.">
+<meta name="twitter:image" content="https://mimesoft.site/assets/img/og.jpg">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/favicon.png">
+
+<!-- Datos estructurados. Van estáticos y no generados por JS para que los
+     rastreadores los lean sin ejecutar nada. OJO: duplican los valores de
+     BUSINESS en assets/js/content.js — si cambias uno, cambia el otro. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://mimesoft.site/#mimesoft",
+  "name": "Mimesoft",
+  "url": "https://mimesoft.site/",
+  "logo": "https://mimesoft.site/assets/img/favicon.png",
+  "image": "https://mimesoft.site/assets/img/og.jpg",
+  "email": "contacto@mimesoft.site",
+  "telephone": "+51994058757",
+  "foundingDate": "2021",
+  "description": "Consultoría de software: sistemas internos a medida, sitios web, automatización de procesos con n8n e integración de WhatsApp Business API.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Mariano Melgar",
+    "addressRegion": "Arequipa",
+    "addressCountry": "PE"
+  },
+  "areaServed": { "@type": "Country", "name": "Perú" },
+  "availableLanguage": ["es", "en"],
+  "knowsAbout": [
+    "Desarrollo de software a medida",
+    "Automatización de procesos con n8n",
+    "WhatsApp Business API",
+    "Chatbots con inteligencia artificial",
+    "Desarrollo web"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sistemas internos a medida" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Desarrollo de sitios y aplicaciones web" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatización de procesos con n8n" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Integración de WhatsApp Business API y chatbots" } }
+    ]
+  }
+}
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/sections.css">
+</head>
+
+<body>
+
+<!-- ===== Preloader ===================================================== -->
+<div class="preloader" role="status" aria-live="polite">
+  <div class="preloader__mark">
+    <span class="logo logo--xl" aria-hidden="true"></span>
+    <span class="visually-hidden" data-i18n="a11y.loading">Cargando</span>
+  </div>
+  <p class="preloader__count"><span>000</span></p>
+  <div class="preloader__bar"></div>
+</div>
+
+<!-- ===== Capas de fondo ================================================ -->
+<div class="backdrop" aria-hidden="true">
+  <div class="backdrop__gradient"></div>
+  <div class="backdrop__glow"></div>
+  <div class="backdrop__noise"></div>
+</div>
+
+<!-- ===== Header ======================================================== -->
+<header class="header">
+  <div class="container header__inner">
+    <a class="header__logo" href="#top" aria-label="Mimesoft, inicio">
+      <span class="logo" aria-hidden="true"></span>
+      <span class="logo__word">Mimesoft</span>
+    </a>
+
+    <nav class="header__nav" aria-label="Navegación principal">
+      <a href="#proyectos"    data-i18n="nav.projects">Proyectos</a>
+      <a href="#soluciones"   data-i18n="nav.solutions">Soluciones</a>
+      <a href="#tecnologias"  data-i18n="nav.tech">Tecnologías</a>
+      <a href="#experiencias" data-i18n="nav.experiences">Experiencias</a>
+      <a href="#contacto"     data-i18n="nav.contact">Contacto</a>
+    </nav>
+
+    <div class="header__actions">
+      <div class="lang-toggle" role="group" data-i18n-attr="aria-label:a11y.lang">
+        <button type="button" data-lang="es" aria-pressed="true">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+
+      <button type="button" class="theme-toggle" data-theme-toggle data-i18n-attr="aria-label:a11y.theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <a class="button button--small button--wa" href="#contacto" data-wa data-i18n="nav.cta">Hablemos</a>
+
+      <button type="button" class="header__burger" aria-expanded="false" data-i18n-attr="aria-label:a11y.menu">
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===== Hero ======================================================== -->
+  <section class="hero section" aria-labelledby="hero-heading">
+    <div class="container grid">
+      <div class="hero__content">
+        <span class="caption" data-reveal data-i18n="hero.caption">Consultoría de software</span>
+        <h1 class="hero__heading font-s1" id="hero-heading" data-lines data-i18n="hero.heading">
+          Automatizamos lo que te quita tiempo
+        </h1>
+        <p class="hero__text font-body-xl" data-reveal data-reveal-delay=".1" data-i18n="hero.text">
+          Desarrollamos páginas web, automatizaciones con n8n e integraciones de WhatsApp Business API.
+        </p>
+        <a class="button button--wa" href="#contacto" data-wa data-reveal data-reveal-delay=".2" data-i18n="hero.cta">
+          Conversemos por WhatsApp
+        </a>
+      </div>
+
+      <div class="hero__assets" data-parallax-scope>
+        <picture class="hero__image">
+          <img src="assets/img/general/software_01.webp" alt="" width="1120" height="1500" loading="eager" fetchpriority="high">
+        </picture>
+
+        <div class="hero__float hero__float--1" data-speed="1.25">
+          <div data-parallax="1.2">
+            <p class="hero__float-label">
+              <span data-i18n="hero.float1.label">Mensajes atendidos</span>
+            </p>
+            <p class="hero__float-value" data-i18n="hero.float1.value">12.480</p>
+            <p class="hero__float-meta" data-i18n="hero.float1.meta">Últimos 30 días</p>
+          </div>
+        </div>
+
+        <div class="hero__float hero__float--2" data-speed="1.15">
+          <div data-parallax="2.75">
+            <p class="hero__float-label">
+              <span data-i18n="hero.float2.label">Respuesta media</span>
+            </p>
+            <p class="hero__float-value" data-i18n="hero.float2.value">8s</p>
+            <p class="hero__float-meta" data-i18n="hero.float2.meta">Chatbot en producción</p>
+          </div>
+        </div>
+
+        <div class="hero__float hero__float--3" data-speed="1.3">
+          <div data-parallax="0.6">
+            <p class="hero__float-label">
+              <span data-i18n="hero.float3.label">Procesos activos</span>
+            </p>
+            <p class="hero__float-value" data-i18n="hero.float3.value">37</p>
+            <p class="hero__float-meta" data-i18n="hero.float3.meta">Workflows n8n</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Qué hacemos (panel sólido) ================================== -->
+  <section class="section" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="panel about" data-parallax-scope>
+        <!-- El texto manda y va al centro; las tres cajas quedan dispersas
+             alrededor, como en las secciones de la referencia. -->
+        <div class="about__center">
+          <span class="caption" data-reveal data-i18n="about.caption">Qué hacemos</span>
+          <h2 class="about__heading font-h2" id="about-heading" data-lines data-i18n="about.heading">
+            Diseñamos, desarrollamos y mantenemos el software que tu empresa necesita.
+          </h2>
+        </div>
+
+        <article class="about__card about__card--1" data-speed="1.12">
+          <div data-parallax="1.4">
+            <h3 class="about__card-title" data-i18n="about.cards.0.title">Desarrollo</h3>
+            <ul class="about__card-list">
+              <li data-i18n="about.cards.0.items.0">Sistemas internos a medida</li>
+              <li data-i18n="about.cards.0.items.1">Sitios y aplicaciones web</li>
+              <li data-i18n="about.cards.0.items.2">Integraciones con APIs de terceros</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="about__card about__card--2" data-speed="1.2">
+          <div data-parallax="0.7">
+            <h3 class="about__card-title" data-i18n="about.cards.1.title">Automatización</h3>
+            <ul class="about__card-list">
+              <li data-i18n="about.cards.1.items.0">Workflows en n8n</li>
+              <li data-i18n="about.cards.1.items.1">Sincronización entre sistemas</li>
+              <li data-i18n="about.cards.1.items.2">Reportes y alertas automáticas</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="about__card about__card--3" data-speed="1.08">
+          <div data-parallax="2.2">
+            <h3 class="about__card-title" data-i18n="about.cards.2.title">Mensajería</h3>
+            <ul class="about__card-list">
+              <li data-i18n="about.cards.2.items.0">WhatsApp Business API</li>
+              <li data-i18n="about.cards.2.items.1">Chatbots con IA</li>
+              <li data-i18n="about.cards.2.items.2">Soporte y mantenimiento</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+  </section>
+
+  <!-- ===== Proyectos — el eje de la página ============================= -->
+  <section class="section" id="proyectos" aria-labelledby="projects-heading">
+    <div class="container">
+      <div class="projects__head">
+        <div>
+          <span class="caption" data-reveal data-i18n="projects.caption">Proyectos</span>
+          <h2 class="font-h2" id="projects-heading" data-lines data-i18n="projects.heading">Lo que hemos construido</h2>
+        </div>
+        <a class="link" href="#contacto" data-wa data-reveal data-i18n="projects.link">Cuéntanos tu proyecto</a>
+      </div>
+
+      <div class="projects__bar" data-reveal>
+        <!-- Los chips los construye projects.js a partir de PROJECT_TYPES,
+             con el contador real y omitiendo los tipos sin proyectos. -->
+        <div class="projects__filters" role="group" data-i18n-attr="aria-label:a11y.filters"></div>
+
+        <div class="view-toggle" role="group" data-i18n-attr="aria-label:a11y.views">
+          <button type="button" data-view="index"   aria-pressed="true"  data-i18n="projects.views.index">Índice</button>
+          <button type="button" data-view="gallery" aria-pressed="false" data-i18n="projects.views.gallery">Galería</button>
+        </div>
+      </div>
+
+      <div class="projects__list"></div>
+      <p class="projects__empty" hidden data-i18n="projects.labels.empty">No hay proyectos de este tipo todavía.</p>
+    </div>
+  </section>
+
+  <!-- Preview flotante del modo Índice. Va fuera del contenedor porque es
+       position:fixed y sigue al cursor. -->
+  <figure class="projects__preview" aria-hidden="true"></figure>
+
+  <!-- ===== Soluciones ================================================== -->
+  <div id="soluciones">
+    <section class="solution" aria-labelledby="sol-0">
+      <div class="container">
+        <span class="caption" data-reveal data-i18n="solutions.items.0.caption">Desarrollo web</span>
+        <h2 class="solution__heading font-h2" id="sol-0" data-lines data-i18n="solutions.items.0.heading">
+          Páginas y aplicaciones web que cargan rápido y convierten
+        </h2>
+        <p class="solution__body font-body-l" data-reveal data-i18n="solutions.items.0.body"></p>
+        <a class="link" href="#contacto" data-wa data-reveal data-i18n="solutions.items.0.link">Ver cómo trabajamos</a>
+      </div>
+      <aside class="solution__float solution__float--tl" data-speed="1.2" aria-hidden="true">
+        <p class="caption">Stack principal</p><p class="hero__float-value">Laravel</p>
+      </aside>
+      <aside class="solution__float solution__float--br" data-speed="0.85" aria-hidden="true">
+        <p class="caption">Sin plantillas</p><p class="hero__float-value">A medida</p>
+      </aside>
+    </section>
+
+    <section class="solution" aria-labelledby="sol-1">
+      <div class="container">
+        <span class="caption" data-reveal data-i18n="solutions.items.1.caption">Automatización</span>
+        <h2 class="solution__heading font-h2" id="sol-1" data-lines data-i18n="solutions.items.1.heading">
+          Automatizaciones con n8n que eliminan el trabajo repetitivo
+        </h2>
+        <p class="solution__body font-body-l" data-reveal data-i18n="solutions.items.1.body"></p>
+        <a class="link" href="#contacto" data-wa data-reveal data-i18n="solutions.items.1.link">Ver automatizaciones</a>
+      </div>
+      <aside class="solution__float solution__float--tr" data-speed="1.3" aria-hidden="true">
+        <p class="caption">Motor de automatización</p><p class="hero__float-value">n8n</p>
+      </aside>
+      <aside class="solution__float solution__float--bl" data-speed="0.9" aria-hidden="true">
+        <p class="caption">Intervención manual</p><p class="hero__float-value">Ninguna</p>
+      </aside>
+    </section>
+
+    <!-- Bloque deliberadamente más desarrollado: es el que lee Meta. -->
+    <section class="solution" aria-labelledby="sol-2">
+      <div class="container">
+        <span class="caption" data-reveal data-i18n="solutions.items.2.caption">WhatsApp Business API</span>
+        <h2 class="solution__heading font-h2" id="sol-2" data-lines data-i18n="solutions.items.2.heading">
+          Integración oficial de WhatsApp Business API
+        </h2>
+        <p class="solution__body font-body-l" data-reveal data-i18n="solutions.items.2.body"></p>
+        <a class="link" href="#contacto" data-wa data-reveal data-i18n="solutions.items.2.link">Hablar de tu integración</a>
+      </div>
+      <aside class="solution__float solution__float--tl solution__float--accent" data-speed="1.25" aria-hidden="true">
+        <p class="caption">API de WhatsApp Business</p><p class="hero__float-value">Oficial</p>
+      </aside>
+      <aside class="solution__float solution__float--br" data-speed="0.8" aria-hidden="true">
+        <p class="caption">Infraestructura</p><p class="hero__float-value">Meta Cloud</p>
+      </aside>
+    </section>
+
+    <section class="solution" aria-labelledby="sol-3">
+      <div class="container">
+        <span class="caption" data-reveal data-i18n="solutions.items.3.caption">Chatbots con IA</span>
+        <h2 class="solution__heading font-h2" id="sol-3" data-lines data-i18n="solutions.items.3.heading">
+          Chatbots que entienden a tus clientes y resuelven de verdad
+        </h2>
+        <p class="solution__body font-body-l" data-reveal data-i18n="solutions.items.3.body"></p>
+        <a class="link" href="#contacto" data-wa data-reveal data-i18n="solutions.items.3.link">Ver un chatbot en vivo</a>
+      </div>
+      <aside class="solution__float solution__float--tr" data-speed="1.15" aria-hidden="true">
+        <p class="caption">Clasificación de intención</p><p class="hero__float-value">Con IA</p>
+      </aside>
+      <aside class="solution__float solution__float--bl" data-speed="0.95" aria-hidden="true">
+        <p class="caption">Disponibilidad</p><p class="hero__float-value">24/7</p>
+      </aside>
+    </section>
+  </div>
+
+  <!-- ===== Tecnologías ================================================= -->
+  <section class="section" id="tecnologias" aria-labelledby="tech-heading">
+    <div class="container">
+      <span class="caption" data-reveal data-i18n="tech.caption">Tecnologías</span>
+      <h2 class="font-h2" id="tech-heading" data-lines data-i18n="tech.heading">El stack con el que construimos</h2>
+      <ul class="tech__grid"></ul>
+    </div>
+  </section>
+
+  <!-- ===== Experiencias (pin + scroll horizontal) ====================== -->
+  <section class="experiences" id="experiencias" aria-labelledby="exp-heading" hidden>
+    <div class="experiences__stage">
+      <div class="experiences__head container">
+        <span class="caption caption--centered" data-i18n="experiences.caption">Experiencias de clientes</span>
+        <h2 class="experiences__heading font-s1" id="exp-heading">
+          <span data-i18n="experiences.heading1">Clientes</span>
+          <span data-i18n="experiences.heading2">Satisfechos</span>
+        </h2>
+      </div>
+      <div class="experiences__track"></div>
+    </div>
+  </section>
+
+  <!-- ===== Contacto ==================================================== -->
+  <section class="section" id="contacto" aria-labelledby="contact-heading">
+    <div class="container grid">
+      <div class="contact__inner">
+        <div>
+          <span class="caption" data-reveal data-i18n="contact.caption">Contacto</span>
+          <h2 class="contact__heading font-h2" id="contact-heading" data-lines data-i18n="contact.heading">
+            Hablemos de tu proyecto
+          </h2>
+          <p class="contact__text font-body-l" data-reveal data-i18n="contact.text"></p>
+          <a class="button button--wa" href="#" data-wa data-reveal data-reveal-delay=".1" data-i18n="contact.cta">Abrir WhatsApp</a>
+        </div>
+
+        <!-- Estos datos son los que Meta contrasta en la verificación. -->
+        <div class="contact__identity" data-reveal data-reveal-delay=".15">
+          <span class="caption" data-i18n="contact.identity.title">Datos de contacto</span>
+
+          <div class="contact__row">
+            <span class="contact__label" data-i18n="contact.identity.legal">Responsable</span>
+            <span class="contact__value" data-business="business.displayName"></span>
+          </div>
+          <div class="contact__row">
+            <span class="contact__label" data-i18n="contact.identity.address">Ubicación</span>
+            <span class="contact__value" data-business="business.shortAddress"></span>
+          </div>
+          <div class="contact__row">
+            <span class="contact__label" data-i18n="contact.identity.email">Correo</span>
+            <a class="contact__value" data-business="business.email" href="#"></a>
+          </div>
+          <div class="contact__row">
+            <span class="contact__label" data-i18n="contact.identity.phone">Teléfono</span>
+            <a class="contact__value" data-business="business.phone" href="#"></a>
+          </div>
+
+          <!-- Razón social, RUC y domicilio fiscal viven sólo aquí. -->
+          <p class="contact__full">
+            <a href="privacidad.html" data-i18n="contact.identity.full">Datos fiscales completos en la Política de Privacidad</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Footer ======================================================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__panel">
+
+      <div class="marquee footer__marquee">
+        <a class="marquee__track" href="#" data-wa aria-label="Hablemos por WhatsApp">
+          <span class="marquee__item font-h1" data-i18n="footer.marquee">Hablemos por WhatsApp</span>
+          <span class="marquee__item font-h1" aria-hidden="true" data-i18n="footer.marquee">Hablemos por WhatsApp</span>
+          <span class="marquee__item font-h1" aria-hidden="true" data-i18n="footer.marquee">Hablemos por WhatsApp</span>
+          <span class="marquee__item font-h1" aria-hidden="true" data-i18n="footer.marquee">Hablemos por WhatsApp</span>
+          <span class="marquee__item font-h1" aria-hidden="true" data-i18n="footer.marquee">Hablemos por WhatsApp</span>
+        </a>
+      </div>
+
+      <div class="footer__cols">
+        <div class="footer__col footer__col--brand">
+          <span class="caption footer__col-head" data-business="business.brand">Mimesoft</span>
+          <p class="footer__blurb" data-i18n="footer.blurb"></p>
+          <a class="button button--small button--wa footer__cta" href="#" data-wa data-i18n="ctaBar.cta">Escribir</a>
+        </div>
+
+        <nav class="footer__col" aria-label="Navegación del pie">
+          <span class="caption footer__col-head" data-i18n="footer.pages">Navegación</span>
+          <ul>
+            <li><a href="#proyectos"    data-i18n="nav.projects">Proyectos</a></li>
+            <li><a href="#soluciones"   data-i18n="nav.solutions">Soluciones</a></li>
+            <li><a href="#tecnologias"  data-i18n="nav.tech">Tecnologías</a></li>
+            <li><a href="#contacto"     data-i18n="nav.contact">Contacto</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col" aria-label="Enlaces legales">
+          <span class="caption footer__col-head" data-i18n="footer.legalCol">Legal</span>
+          <ul>
+            <li><a href="privacidad.html"        data-i18n="footer.privacy">Política de Privacidad</a></li>
+            <li><a href="terminos.html"          data-i18n="footer.terms">Términos de Servicio</a></li>
+            <li><a href="eliminacion-datos.html" data-i18n="footer.deletion">Eliminación de datos</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+      <!-- El wordmark se dimensiona con container queries sobre el ancho del
+           panel, no con vw: así encaja siempre en vez de desbordarse. -->
+      <p class="footer__wordmark" aria-hidden="true" data-business="business.brand">Mimesoft</p>
+    </div>
+
+    <!-- Identidad legal visible: requisito de la verificación de Meta. -->
+    <div class="footer__legal">
+      <p>
+        © <span data-business="business.year"></span>
+        <span data-business="business.displayName"></span> ·
+        <span data-business="business.shortAddress"></span>
+      </p>
+      <p><a href="#" data-business="business.email"></a></p>
+  </div>
+</footer>
+
+<!-- ===== Barra CTA fija ================================================ -->
+<div class="cta-bar">
+  <span class="cta-bar__text" data-i18n="ctaBar.text">Cuéntanos qué necesitas automatizar</span>
+  <a class="button button--small button--wa" href="#" data-wa data-i18n="ctaBar.cta">Escribir</a>
+</div>
+
+<!-- ===== Scripts ======================================================= -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/Flip.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
+<script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1065 @@
+/* ==========================================================================
+   sections.css — maquetación de cada sección de la landing.
+   ========================================================================== */
+
+/* --- Hero ---------------------------------------------------------------- */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: 10rem 6rem;
+}
+
+.hero__content { grid-column: 1 / 8; }
+
+.hero__heading {
+  color: var(--text);
+  margin-block: 1.5rem 2rem;
+  font-size: 6.5rem;   /* el titular más largo debe caber en una línea */
+}
+
+@media (max-width: 64rem)  { .hero__heading { font-size: 3.25rem; margin-block: 1.25rem 1.5rem; } }
+@media (max-width: 30rem)  { .hero__heading { font-size: 2.5rem; } }
+
+.hero__text { color: var(--muted); max-width: 32ch; margin-bottom: 2.5rem; }
+
+.hero__assets {
+  grid-column: 9 / 13;
+  position: relative;
+  aspect-ratio: 4 / 5;
+}
+
+.hero__image {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--surface);
+}
+.hero__image img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Tarjetas de UI flotantes: parallax de scroll + de ratón. */
+.hero__float {
+  position: absolute;
+  width: 62%;
+  border-radius: var(--radius-card);
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, .35);
+  will-change: transform;
+}
+
+.hero__float--1 { top: 8%;  left: -18%; }
+.hero__float--2 { top: 44%; right: -12%; width: 52%; background: var(--panel); color: var(--panel-ink); border-color: transparent; }
+.hero__float--3 { bottom: 6%; left: -10%; width: 50%; }
+
+.hero__float-label {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  font-family: "Geist Mono", monospace;
+  font-size: .75rem;
+  letter-spacing: -.02em;
+  opacity: .75;
+}
+.hero__float-value { font-size: 2.5rem; line-height: 1.1; letter-spacing: -.03em; }
+.hero__float-meta  { font-size: .75rem; opacity: .7; }
+
+@media (max-width: 64rem) {
+  .hero { min-height: 0; padding-block: 7rem 3rem; }
+  .hero__content { grid-column: 1 / -1; }
+  .hero__text { max-width: none; }
+
+  /* Las tres tarjetas iban absolutas sobre un cuadrado: en móvil no hay sitio
+     y se montaban unas encima de otras. Pasan a ser una fila bajo la imagen. */
+  .hero__assets {
+    grid-column: 1 / -1;
+    margin-top: 2rem;
+    aspect-ratio: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .625rem;
+  }
+
+  .hero__image {
+    position: relative;
+    grid-column: 1 / -1;
+    aspect-ratio: 4 / 3;
+    margin-bottom: .375rem;
+  }
+
+  .hero__float {
+    position: static;
+    inset: auto;
+    width: auto;
+    padding: .75rem .625rem;
+    box-shadow: none;
+    transform: none !important;   /* anula el parallax de scroll */
+  }
+  .hero__float > div { transform: none !important; }
+
+  .hero__float-label { font-size: .625rem; gap: .25rem; }
+  .hero__float-value { font-size: 1.5rem; margin-top: .125rem; }
+  .hero__float-meta  { font-size: .5625rem; line-height: 1.3; }
+}
+
+/* --- Qué hacemos ----------------------------------------------------------
+   El texto manda y va centrado; las tres cajas quedan dispersas alrededor en
+   lugar de alineadas debajo. Antes era un párrafo enorme a sangre con tres
+   tarjetas en fila: demasiado peso de texto para una página minimalista.
+   -------------------------------------------------------------------------- */
+.about {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 42rem;
+  padding: 7rem 5rem;
+  overflow: hidden;
+}
+
+.about__center {
+  text-align: center;
+  max-width: 40rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Algo menor que .font-h2: a 4rem el titular caía a cinco líneas y volvía a
+   leerse como un muro de texto, que era justo el problema. */
+.about__heading { font-size: 3.25rem; line-height: 1.08; margin-top: 1.75rem; }
+
+@media (max-width: 64rem) { .about__heading { font-size: 1.875rem; line-height: 1.2; } }
+
+/* Cajas dispersas. Van absolutas sobre el panel y derivan con el ratón y con
+   el scroll, así que el bloque respira en vez de ser una rejilla. */
+.about__card {
+  position: absolute;
+  width: 17rem;
+  padding: 1.5rem;
+  border-radius: var(--radius-card);
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, .25);
+  will-change: transform;
+}
+
+.about__card--1 { top: 12%;    left: 4%;  }
+.about__card--2 { bottom: 10%; left: 14%; }
+.about__card--3 { top: 26%;    right: 5%; }
+
+.about__card-title { font-size: 1.0625rem; letter-spacing: -.02em; margin-bottom: 1rem; }
+
+.about__card-list { display: grid; gap: .5rem; color: var(--muted); font-size: .8125rem; }
+.about__card-list li { display: flex; gap: .5rem; line-height: 1.4; }
+.about__card-list li::before { content: "—"; color: currentColor; opacity: .5; flex: none; }
+
+@media (max-width: 64rem) {
+  /* Dispersar no funciona sin espacio: en móvil vuelven a apilarse. */
+  .about {
+    display: block;
+    min-height: 0;
+    padding: 3rem 1.5rem;
+  }
+  .about__center { max-width: none; margin-bottom: 2.5rem; }
+  .about__card {
+    position: static;
+    width: auto;
+    margin-bottom: 1rem;
+    box-shadow: none;
+    transform: none !important;
+  }
+}
+
+/* --- Soluciones ---------------------------------------------------------- */
+.solution { position: relative; padding-block: 8rem; text-align: center; }
+
+.solution__heading { max-width: 18ch; margin-inline: auto; margin-block: 1.5rem 1.75rem; }
+
+.solution__body { color: var(--muted); max-width: 52ch; margin-inline: auto; margin-bottom: 2rem; }
+
+/* Tarjetas flotantes que entran y salen de opacidad con el scroll. */
+.solution__float {
+  position: absolute;
+  width: 20rem;
+  max-width: 34vw;
+  border-radius: var(--radius-card);
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, .45);
+  padding: 1.25rem 1.5rem;
+  font-size: .8125rem;
+  will-change: transform, opacity;
+}
+
+/* La cifra es el dato: va en blanco pleno, no en gris. */
+.solution__float .hero__float-value { color: var(--text); margin-top: .25rem; }
+.solution__float .caption { color: var(--text); opacity: .7; }
+
+.solution__float--tl { top: 2rem;    left: 0; }
+.solution__float--tr { top: 6rem;    right: 0; }
+.solution__float--bl { bottom: 2rem; left: 6%; }
+.solution__float--br { bottom: 6rem; right: 4%; }
+
+.solution__float--accent {
+  border-color: var(--text);
+  box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, .55);
+}
+
+@media (max-width: 64rem) {
+  .solution { padding-block: 4rem; }
+  .solution__float { display: none; }
+}
+
+/* --- Tecnologías --------------------------------------------------------- */
+.tech__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--grid-gap);
+  margin-top: 4rem;
+}
+
+.tech__item {
+  display: grid;
+  place-items: center;
+  gap: .875rem;
+  padding: 2rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  filter: grayscale(1);
+  opacity: .78;
+  transition: filter var(--t-fast) var(--ease),
+              opacity var(--t-fast) var(--ease),
+              scale var(--t-fast) var(--ease),
+              background var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease);
+}
+
+.tech__item:hover {
+  filter: none;
+  opacity: 1;
+  scale: 1.03;
+  background: var(--surface-2);
+  border-color: var(--line-strong);
+}
+
+.tech__item:hover .tech__name { color: var(--text); }
+
+.tech__item img, .tech__item svg { height: 2rem; width: auto; }
+
+.tech__name {
+  font-family: "Geist Mono", monospace;
+  font-size: .75rem;
+  letter-spacing: -.02em;
+  color: var(--text);
+  opacity: .82;
+  text-align: center;
+  transition: color var(--t-fast) var(--ease);
+}
+
+@media (max-width: 64rem) {
+  .tech__grid { grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+  .tech__item { padding: 1.25rem .5rem; filter: none; opacity: 1; }
+}
+/* --- Proyectos -----------------------------------------------------------
+   El eje de la página. Dos modos de vista sobre el MISMO DOM: sólo cambia
+   la clase del contenedor (.is-index / .is-gallery), para que GSAP Flip
+   pueda morfear entre ellos.
+   ------------------------------------------------------------------------- */
+.projects__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.projects__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-bottom: 1.25rem;
+  margin-bottom: .5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+/* --- Chips de filtro --- */
+.projects__filters { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+.filter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .375rem;
+  padding: .5rem .875rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: .8125rem;
+  letter-spacing: -.02em;
+  color: var(--muted);
+  transition: color var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease),
+              background var(--t-fast) var(--ease);
+}
+.filter sup { font-size: .625rem; opacity: .6; }
+.filter:hover { color: var(--text); border-color: var(--line-strong); }
+.filter[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* --- Conmutador de vista --- */
+.view-toggle {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.view-toggle button {
+  padding: .5rem .875rem;
+  font-family: "Geist Mono", monospace;
+  font-size: .75rem;
+  letter-spacing: -.02em;
+  color: var(--muted);
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.view-toggle button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+
+.projects__empty {
+  padding: 4rem 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ======================= Tarjeta de proyecto ============================= */
+.project { position: relative; }
+.project[hidden] { display: none; }
+
+.project__head {
+  display: grid;
+  width: 100%;
+  text-align: left;
+  align-items: center;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity var(--t-fast) var(--ease);
+}
+
+.project__num {
+  font-family: "Geist Mono", monospace;
+  font-size: .75rem;
+  color: var(--muted);
+}
+
+.project__name { letter-spacing: -.03em; }
+
+.project__summary,
+.project__client,
+.project__type,
+.project__year { color: var(--muted); }
+
+.project__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  font-family: "Geist Mono", monospace;
+  font-size: .8125rem;
+  letter-spacing: -.02em;
+}
+
+/* Chevron que gira al abrir. */
+.project__chevron {
+  width: 1.5rem; height: 1.5rem;
+  position: relative;
+  justify-self: end;
+  flex: none;
+}
+.project__chevron::before,
+.project__chevron::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  background: currentColor;
+  translate: -50% -50%;
+  transition: rotate var(--t-med) var(--ease), opacity var(--t-med) var(--ease);
+}
+.project__chevron::before { width: .75rem; height: 1px; }
+.project__chevron::after  { width: 1px; height: .75rem; }
+.project.is-open .project__chevron::after { rotate: 90deg; opacity: 0; }
+
+/* --- Panel desplegable ---
+   grid-template-rows 0fr→1fr: anima sin medir alturas a mano, así que
+   sigue funcionando si el contenido cambia de tamaño después. */
+.project__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--t-slow) var(--ease);
+}
+.project.is-open .project__panel { grid-template-rows: 1fr; }
+
+.project__panel-inner {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  opacity: 0;
+  transition: opacity var(--t-fast) var(--ease);
+}
+.project.is-open .project__panel-inner { opacity: 1; transition-delay: .15s; }
+
+.project__detail { display: grid; gap: 2rem; padding-block: 2.5rem 3.5rem; }
+.project__block { display: grid; gap: .75rem; }
+.project__block-text { color: var(--muted); max-width: 48ch; }
+
+.project__stack { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+.project__result {
+  display: grid;
+  gap: .5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+.project__result-value {
+  font-size: 3rem;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -.03em;
+}
+.project__result-label { color: var(--muted); font-size: .875rem; }
+
+.project__visual { padding-block: 2.5rem 3.5rem; }
+
+/* ======================= Modo ÍNDICE ===================================== */
+.projects__list.is-index .project { border-bottom: 1px solid var(--line); }
+
+.projects__list.is-index .project__head {
+  grid-template-columns: 3rem minmax(0, 1.1fr) minmax(0, 1.4fr) auto 1.5rem;
+  gap: 2rem;
+  padding-block: 2rem;
+}
+
+.projects__list.is-index .project__thumb { display: none; }
+
+.projects__list.is-index .project__name     { font-size: 1.75rem; }
+.projects__list.is-index .project__client   { display: none; }
+.projects__list.is-index .project__summary  { font-size: .9375rem; }
+
+/* El hover es el único momento decorativo: la fila apuntada se queda, el
+   resto baja de opacidad. */
+.projects__list.is-index.is-hovering .project { opacity: .35; }
+.projects__list.is-index.is-hovering .project:hover,
+.projects__list.is-index .project.is-open { opacity: 1; }
+
+/* ======================= Modo GALERÍA ==================================== */
+.projects__list.is-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--grid-gap);
+  align-items: start;
+}
+
+.projects__list.is-gallery .project {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color var(--t-fast) var(--ease);
+}
+.projects__list.is-gallery .project:hover { border-color: var(--line-strong); }
+
+/* Una ficha abierta ocupa el ancho completo de la rejilla. */
+.projects__list.is-gallery .project.is-open { grid-column: 1 / -1; }
+
+.projects__list.is-gallery .project__head {
+  grid-template-columns: auto 1fr 1.5rem;
+  grid-template-areas:
+    "thumb thumb thumb"
+    "num   meta  chevron"
+    "name  name  name"
+    "sum   sum   sum";
+  gap: .75rem 1rem;
+  padding: 1rem 1rem 1.75rem;
+}
+.projects__list.is-gallery .project__thumb   { grid-area: thumb; margin: -1rem -1rem .75rem; }
+.projects__list.is-gallery .project__num     { grid-area: num; }
+.projects__list.is-gallery .project__client  { grid-area: num; justify-self: start; display: none; }
+.projects__list.is-gallery .project__meta    { grid-area: meta; justify-self: end; }
+.projects__list.is-gallery .project__chevron { grid-area: chevron; }
+.projects__list.is-gallery .project__name    { grid-area: name; font-size: 1.5rem; }
+.projects__list.is-gallery .project__summary { grid-area: sum; font-size: .9375rem; }
+
+.projects__list.is-gallery .project__panel-inner { padding-inline: 1rem; }
+
+/* ======================= Miniatura y preview ============================= */
+.project__thumb {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+}
+.project__thumb > * { width: 100%; height: 100%; }
+
+/* 16/10 es la proporcion de una captura. Un diagrama o una conversacion
+   tienen su propia altura natural: forzarlos al mismo marco deja medio
+   recuadro vacio. */
+.project__thumb:has(.flow--compact),
+.project__thumb:has(.chat--compact) { aspect-ratio: auto; }
+.project__thumb:has(.flow--compact) > *,
+.project__thumb:has(.chat--compact) > * { height: auto; }
+
+/* Preview que sigue al cursor en modo Índice. */
+.projects__preview {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: var(--z-preview);
+  width: 22rem;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  scale: .94;
+}
+.projects__preview > * { width: 100%; height: 100%; }
+
+/* Las capturas van en gris en el listado y recuperan su color cuando el
+   proyecto pasa a ser el protagonista. Mantiene el índice monocromo sin
+   falsear el trabajo real. */
+.project__shot { width: 100%; height: 100%; overflow: hidden; }
+.project__shot img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter var(--t-med) var(--ease);
+}
+.project.is-open .project__visual .project__shot img,
+.projects__preview .project__shot img { filter: none; }
+
+.project__visual .project__shot {
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--line);
+}
+
+/* ======================= Diagrama de flujo ===============================
+   Se dibuja con HTML y no con SVG: las etiquetas son texto de longitud
+   variable y en SVG habría que medirlas y partirlas a mano. Los conectores
+   son pseudo-elementos que escalan desde arriba, así que el efecto de
+   «ir dibujándose» se mantiene.
+   ------------------------------------------------------------------------- */
+.flow {
+  display: grid;
+  gap: 1.75rem;
+  counter-reset: flow;
+  padding: 2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.flow__node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+  padding: .875rem 1.125rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-btn);
+  background: var(--bg);
+}
+
+/* Conector hacia el nodo siguiente. */
+.flow__node:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 2rem;
+  top: 100%;
+  width: 1px;
+  height: 1.75rem;
+  background: var(--line-strong);
+  transform-origin: top center;
+  scale: 1 0;
+  transition: scale var(--t-med) var(--ease);
+  transition-delay: calc(var(--i) * .07s + .2s);
+}
+.project.is-open .flow__node:not(:last-child)::after { scale: 1 1; }
+
+.flow__index {
+  font-family: "Geist Mono", monospace;
+  font-size: .6875rem;
+  color: var(--muted);
+  flex: none;
+  width: 1.25rem;
+}
+.flow__label { font-size: .9375rem; letter-spacing: -.01em; }
+
+/* Versión miniatura: cabe en la tarjeta y en el preview flotante. */
+.flow--compact {
+  gap: .5rem;
+  padding: 1.25rem;
+  border: 0;
+  border-radius: 0;
+  align-content: center;
+}
+.flow--compact .flow__node { padding: .4375rem .625rem; gap: .5rem; }
+.flow--compact .flow__label { font-size: .75rem; }
+.flow--compact .flow__index { font-size: .5625rem; width: 1rem; }
+.flow--compact .flow__node:not(:last-child)::after { height: .5rem; left: 1.5rem; scale: 1 1; }
+
+/* ======================= Panel sobre foto ================================
+   El montaje "comercial": la foto de la flota al fondo, oscurecida, y el
+   panel del sistema flotando encima. El texto es HTML real, así que sale
+   nítido a cualquier tamaño, se traduce con el resto y no depende de que un
+   modelo de imagen sepa escribir.
+   ------------------------------------------------------------------------- */
+.dash {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--surface-2);
+  isolation: isolate;
+}
+
+.dash__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: grayscale(1) brightness(.46) contrast(1.1);
+}
+
+/* Viñeta: separa el panel del fondo sin depender de cómo salga la foto. */
+.dash::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(120% 90% at 50% 45%, rgba(10,10,11,.35), rgba(10,10,11,.88));
+}
+
+.dash__panel {
+  width: min(86%, 34rem);
+  padding: 1.25rem 1.375rem 1rem;
+  border-radius: var(--radius-card);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  border: 1px solid var(--line-strong);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, .55);
+  color: var(--text);
+}
+
+.dash__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: .875rem;
+  margin-bottom: .25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.dash__meta {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: .6875rem;
+  letter-spacing: -.02em;
+  color: var(--muted);
+}
+
+.dash__table { display: grid; }
+
+.dash__row {
+  display: grid;
+  grid-template-columns: 1.25fr .85fr 1.5fr .75rem;
+  align-items: center;
+  gap: .75rem;
+  padding: .5625rem 0;
+  font-size: .8125rem;
+  letter-spacing: -.01em;
+  border-bottom: 1px solid var(--line);
+}
+.dash__row:last-child { border-bottom: 0; }
+
+.dash__row--head {
+  font-family: "Geist Mono", monospace;
+  font-size: .625rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--muted);
+  padding-block: .5rem;
+}
+
+.dash__meter,
+.dash__status { font-family: "Geist Mono", monospace; font-size: .75rem; color: var(--muted); }
+
+/* El estado se codifica por relleno, no por color: en monocromo el color no
+   está disponible y de todos modos no debería ser el único indicador. */
+.dash__dot {
+  width: .5rem; height: .5rem;
+  border-radius: 50%;
+  justify-self: end;
+  border: 1px solid var(--text);
+}
+.dash__dot--ok      { background: transparent; }
+.dash__dot--due     { background: var(--muted); border-color: var(--muted); }
+.dash__dot--overdue { background: var(--text); }
+
+/* Miniatura: el panel se encoge pero sigue siendo legible. */
+.dash--compact { border-radius: 0; }
+.dash--compact .dash__panel { width: 88%; padding: .75rem .875rem .5rem; }
+.dash--compact .dash__row { font-size: .625rem; padding: .3125rem 0; gap: .5rem; }
+.dash--compact .dash__row--head { font-size: .5rem; }
+.dash--compact .dash__meter,
+.dash--compact .dash__status { font-size: .5625rem; }
+.dash--compact .dash__head { padding-bottom: .5rem; }
+.dash--compact .dash__meta { font-size: .5rem; }
+.dash--compact .dash__dot { width: .375rem; height: .375rem; }
+
+@media (max-width: 64rem) {
+  .dash__panel { width: 92%; padding: .875rem 1rem .75rem; }
+  .dash__row { font-size: .6875rem; gap: .5rem; }
+  .dash__meter, .dash__status { font-size: .625rem; }
+}
+
+/* ======================= Conversación ==================================== */
+.chat {
+  display: grid;
+  gap: .625rem;
+  padding: 2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.chat__bubble {
+  max-width: 78%;
+  padding: .75rem 1rem;
+  border-radius: 1rem;
+  font-size: .9375rem;
+  line-height: 1.45;
+  letter-spacing: -.01em;
+}
+
+/* El bot habla en blanco invertido; el cliente, en superficie oscura. */
+.chat__bubble--bot {
+  justify-self: start;
+  background: var(--panel);
+  color: var(--panel-ink);
+  border-bottom-left-radius: .25rem;
+}
+.chat__bubble--user {
+  justify-self: end;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  border-bottom-right-radius: .25rem;
+}
+
+.chat--compact {
+  gap: .375rem;
+  padding: 1.25rem;
+  border: 0;
+  border-radius: 0;
+  align-content: center;
+}
+.chat--compact .chat__bubble { font-size: .75rem; padding: .4375rem .625rem; border-radius: .625rem; }
+
+/* ======================= Responsive ====================================== */
+@media (max-width: 64rem) {
+  .projects__head { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .projects__bar  { flex-direction: column; align-items: stretch; }
+
+  /* En móvil no hay sitio para las columnas del índice ni cursor al que
+     seguir: sólo galería, en una columna. */
+  .view-toggle { display: none; }
+  .projects__list.is-gallery,
+  .projects__list.is-index { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+
+  .projects__list.is-index .project {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .projects__list.is-index .project__thumb { display: block; }
+  .projects__list.is-index .project__head,
+  .projects__list.is-gallery .project__head {
+    grid-template-columns: auto 1fr 1.5rem;
+    grid-template-areas:
+      "thumb thumb thumb"
+      "num   meta  chevron"
+      "name  name  name"
+      "sum   sum   sum";
+    gap: .75rem 1rem;
+    padding: 1rem 1rem 1.5rem;
+  }
+  .projects__list.is-index .project__thumb { grid-area: thumb; margin: -1rem -1rem .75rem; }
+  .projects__list.is-index .project__num     { grid-area: num; }
+  .projects__list.is-index .project__meta    { grid-area: meta; justify-self: end; }
+  .projects__list.is-index .project__chevron { grid-area: chevron; }
+  .projects__list.is-index .project__name    { grid-area: name; font-size: 1.25rem; }
+  .projects__list.is-index .project__summary { grid-area: sum; display: block; font-size: .875rem; }
+
+  .project__panel-inner { grid-template-columns: 1fr; gap: 0; padding-inline: 1rem; }
+  .project__detail  { padding-block: 1.5rem 1rem; gap: 1.5rem; }
+  .project__visual  { padding-block: 0 2rem; }
+  .project__result-value { font-size: 2.25rem; }
+  .projects__preview { display: none; }
+  .flow, .chat { padding: 1.25rem; }
+}
+
+/* --- Experiencias: sección pinneada con scroll horizontal ---------------- */
+.experiences { position: relative; overflow: hidden; }
+
+.experiences__stage {
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.experiences__head { text-align: center; position: relative; z-index: 1; pointer-events: none; }
+
+/* Las dos palabras separadas, como "Happy  Sellers". */
+.experiences__heading {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  color: var(--text);
+  margin-top: 1.5rem;
+}
+
+.experiences__track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  width: max-content;
+  padding-inline: 70vw 12vw;
+  will-change: transform;
+}
+
+.experience {
+  width: 31.25rem;                      /* 500px @16, igual que la referencia */
+  flex: none;
+  background: var(--panel);
+  color: var(--panel-ink);
+  border-radius: var(--radius-card);
+  padding: 2.625rem;                    /* 42px @16 */
+  display: grid;
+  gap: 2rem;
+}
+
+/* El escalonado vertical: cada tarjeta a distinta altura. */
+.experience:nth-child(4n+1) { translate: 0 -22%; }
+.experience:nth-child(4n+2) { translate: 0 10%; }
+.experience:nth-child(4n+3) { translate: 0 -8%; }
+.experience:nth-child(4n+4) { translate: 0 20%; }
+
+.experience__quote { font-size: 1.25rem; line-height: 1.45; letter-spacing: -.02em; }
+
+.experience__author { color: color-mix(in srgb, currentColor 72%, transparent); }
+.experience__author::before { background: currentColor; }
+
+/* Degradación en móvil: scroll horizontal nativo con snap, sin pin. */
+@media (max-width: 64rem) {
+  .experiences__stage { height: auto; display: block; }
+  .experiences__track {
+    position: static;
+    width: auto;
+    padding-inline: 0;
+    margin-top: 3rem;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .experiences__track::-webkit-scrollbar { display: none; }
+  .experience {
+    width: min(80vw, 22rem);
+    scroll-snap-align: center;
+    translate: none !important;
+  }
+  .experiences__heading { gap: 1rem; }
+}
+
+/* --- Contacto ------------------------------------------------------------ */
+.contact__inner { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+
+.contact__heading { margin-block: 1.5rem 2rem; max-width: 14ch; }
+
+.contact__text { color: var(--muted); max-width: 40ch; margin-bottom: 2.5rem; }
+
+/* Identidad legal del negocio: Meta la contrasta con tus documentos. */
+.contact__identity {
+  display: grid;
+  gap: 1.125rem;
+  padding: 2.625rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.contact__row { display: grid; gap: .25rem; }
+
+.contact__label {
+  font-family: "Geist Mono", monospace;
+  font-size: .6875rem;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.contact__value { font-size: 1rem; letter-spacing: -.01em; }
+
+/* Puente a los datos fiscales completos, que viven sólo en las legales. */
+.contact__full {
+  margin-top: .5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: .8125rem;
+}
+.contact__full a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  transition: color var(--t-fast) var(--ease);
+}
+.contact__full a:hover { color: var(--text); }
+
+@media (max-width: 64rem) {
+  .contact__inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .contact__identity { padding: 1.5rem; }
+}
+
+/* --- Footer ----------------------------------------------------------------
+   Tres cosas que estaban mal antes:
+     · el marquee se cortaba a mitad de palabra contra las esquinas
+       redondeadas y parecía un accidente, no un bucle;
+     · el wordmark iba en vw, así que no tenía relación con el ancho del
+       panel y se desbordaba dejando un hueco muerto;
+     · las columnas no tenían jerarquía ni una llamada a la acción.
+   -------------------------------------------------------------------------- */
+/* Hueco para la barra CTA fija: sin esto tapa la tira legal del pie, que es
+   justo donde van razón social, RUC y dirección. */
+.footer { padding-bottom: 7rem; }
+
+.footer__panel {
+  position: relative;
+  background: var(--panel-alt);
+  color: var(--panel-alt-ink);
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+  container-type: inline-size;   /* para dimensionar el wordmark */
+}
+
+/* El marquee se desvanece en los dos extremos: así el bucle se lee como
+   movimiento continuo y no como texto recortado. */
+.footer__marquee {
+  padding-block: 3.5rem 2.25rem;
+  color: var(--panel-ink);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+
+.footer__marquee .marquee__item { font-size: 4.5rem; letter-spacing: -.03em; }
+
+.footer__cols {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr;
+  gap: 3rem 2rem;
+  padding: 3rem 5rem 2.5rem;
+  border-top: 1px solid rgba(10, 10, 11, .12);
+}
+
+.footer__col-head {
+  display: block;
+  margin-bottom: 1.5rem;
+  color: color-mix(in srgb, currentColor 60%, transparent);
+}
+.footer__col-head::before { background: currentColor; }
+
+.footer__col ul { display: grid; gap: .875rem; }
+.footer__col a {
+  font-size: .9375rem;
+  opacity: .72;
+  transition: opacity var(--t-fast) var(--ease);
+}
+.footer__col a:hover { opacity: 1; }
+
+.footer__col--brand { max-width: 24rem; }
+.footer__blurb { font-size: .9375rem; opacity: .72; line-height: 1.55; }
+.footer__cta { margin-top: 1.75rem; opacity: 1; }
+
+/* Wordmark recortado por el borde inferior. En cqi, así que se escala con el
+   ancho del panel y encaja siempre. */
+.footer__wordmark {
+  display: block;
+  text-align: center;
+  font-size: 17cqi;
+  line-height: .74;
+  letter-spacing: -.045em;
+  font-weight: 400;
+  margin-bottom: -.2em;
+  color: color-mix(in srgb, var(--panel-ink) 9%, transparent);
+  user-select: none;
+  pointer-events: none;
+}
+
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .5rem 2rem;
+  padding: 1.75rem .5rem 0;
+  font-family: "Geist Mono", monospace;
+  font-size: .75rem;
+  letter-spacing: -.02em;
+  color: var(--muted);
+}
+
+.footer__legal a { text-decoration: underline; text-underline-offset: .2em; }
+
+@media (max-width: 64rem) {
+  .footer__marquee { padding-block: 2.25rem 1.5rem; }
+  .footer__marquee .marquee__item { font-size: 2rem; }
+  .footer__cols {
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem 1.5rem 2.5rem;
+    gap: 2rem 1rem;
+  }
+  .footer__col--brand { grid-column: 1 / -1; max-width: none; }
+  .footer__wordmark { font-size: 20cqi; margin-bottom: -.18em; }
+  .footer__legal { flex-direction: column; padding-inline: 0; }
+  .footer { padding-bottom: 8rem; }
+}
+
+/* --- Páginas legales ----------------------------------------------------- */
+.legal { padding-block: 10rem 6rem; }
+.legal__inner { grid-column: 3 / 11; }
+.legal h1 { margin-bottom: 1rem; }
+.legal h2 { font-size: 1.5rem; letter-spacing: -.02em; margin-block: 3rem 1rem; font-weight: 400; }
+.legal p, .legal li { color: var(--muted); margin-bottom: 1rem; max-width: 70ch; }
+.legal ul { list-style: disc; padding-left: 1.25rem; }
+.legal a { color: var(--accent); text-decoration: underline; text-underline-offset: .2em; }
+.legal__updated { font-family: "Geist Mono", monospace; font-size: .8125rem; color: var(--muted); }
+
+@media (max-width: 64rem) {
+  .legal { padding-block: 7rem 3rem; }
+  .legal__inner { grid-column: 1 / -1; }
+}

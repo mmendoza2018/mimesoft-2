@@ -1,0 +1,126 @@
+/* ==========================================================================
+   tokens.css — la única fuente de verdad del sistema visual.
+
+   Paleta monocroma: negro, blanco y grises. El contraste y la tipografía
+   cargan todo el peso visual.
+
+   Hay UNA sola excepción cromática en todo el sitio: --wa, el verde de
+   WhatsApp, reservado a los botones que abren un chat. Ahí el color es
+   funcional (identifica el canal), no decorativo. No usarlo para nada más.
+   ========================================================================== */
+
+:root {
+  /* --- Superficies (tema oscuro, por defecto) ------------------------- */
+  --bg:            #0A0A0B;
+  --surface:       #141416;
+  --surface-2:     #1C1C20;
+  --line:          rgba(250, 250, 250, .10);
+  --line-strong:   rgba(250, 250, 250, .20);
+
+  /* --- Texto ---------------------------------------------------------- */
+  --text:          #FAFAFA;
+  --muted:         #9A9AA2;   /* 7.1:1 sobre --bg */
+
+  /* --- Acento: el blanco ---------------------------------------------- */
+  --accent:        #FAFAFA;
+  --accent-ink:    #0A0A0B;   /* texto sobre --accent */
+
+  /* --- Paneles invertidos a sangre ------------------------------------ */
+  --panel:         #F2F2F0;   /* blanco hueso, texto negro */
+  --panel-ink:     #0A0A0B;
+  --panel-alt:     #F2F2F0;
+  --panel-alt-ink: #0A0A0B;
+
+  /* --- WhatsApp: única excepción de color ----------------------------- */
+  --wa:            #25D366;
+  --wa-ink:        #06130D;
+
+  /* --- Gradiente animado de fondo (grises neutros) -------------------- */
+  --grad-1:        #0A0A0B;
+  --grad-2:        #141418;
+  --grad-3:        #0A0A0B;
+  --grad-4:        #17171C;
+  --glow:          #FFFFFF;
+  --glow-opacity:  .06;
+
+  /* --- Geometría ------------------------------------------------------ */
+  --radius-btn:    .375rem;   /*  6px @16  */
+  --radius-card:   .75rem;    /* 12px @16  */
+  --radius-panel:  2.5rem;
+  --radius-pill:   100rem;
+
+  /* --- Ritmo ---------------------------------------------------------- */
+  --ease:          cubic-bezier(.4, 0, .2, 1);
+  --ease-out:      cubic-bezier(.46, .03, .52, .96);
+  --t-fast:        .3s;
+  --t-med:         .4s;
+  --t-slow:        .6s;
+
+  /* --- Layout --------------------------------------------------------- */
+  --container:     120rem;
+  --gutter:        6rem;
+  --grid-gap:      1.5rem;
+  --section-y:     12rem;
+
+  /* --- Capas ---------------------------------------------------------- */
+  --z-bg:          -1;
+  --z-noise:        1;
+  --z-preview:     40;
+  --z-header:      50;
+  --z-cta:         60;
+  --z-preloader:  100;
+}
+
+/* --------------------------------------------------------------------------
+   Tema claro. Los roles se invierten; ningún color se define SOLO aquí.
+   -------------------------------------------------------------------------- */
+:root[data-theme="light"] {
+  --bg:          #FFFFFF;
+  --surface:     #F4F4F2;
+  --surface-2:   #EAEAE6;
+  --line:        rgba(10, 10, 11, .12);
+  --line-strong: rgba(10, 10, 11, .24);
+
+  --text:        #0A0A0B;
+  --muted:       #5F5F66;
+
+  --accent:      #0A0A0B;     /* en claro el acento es el negro */
+  --accent-ink:  #FAFAFA;
+
+  --panel:         #0A0A0B;   /* y el panel se invierte al revés */
+  --panel-ink:     #FAFAFA;
+  --panel-alt:     #0A0A0B;
+  --panel-alt-ink: #FAFAFA;
+
+  --wa-ink:      #06130D;     /* el verde no cambia: es identidad de canal */
+
+  --grad-1:      #FFFFFF;
+  --grad-2:      #F1F1EF;
+  --grad-3:      #FFFFFF;
+  --grad-4:      #EDEDEA;
+  --glow:        #0A0A0B;
+  --glow-opacity: .05;
+}
+
+/* --------------------------------------------------------------------------
+   Escala tipográfica fluida.
+   El rem base escala linealmente con el ancho (16/1920 = .8333vw), igual que
+   la referencia: todo el diseño mantiene proporción sin breakpoints.
+   -------------------------------------------------------------------------- */
+html {
+  font-size: clamp(14px, .8333vw, 20px);
+}
+
+@media (max-width: 64rem) {
+  :root {
+    --gutter:    2.5rem;
+    --grid-gap:  1.125rem;
+    --section-y: 7rem;
+    --radius-panel: 1.5rem;
+  }
+  html { font-size: clamp(15px, 3.6vw, 17px); }
+}
+
+@media (max-width: 30rem) {
+  :root { --gutter: 1.5rem; }
+}

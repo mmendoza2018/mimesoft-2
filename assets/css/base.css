@@ -1,0 +1,245 @@
+/* ==========================================================================
+   base.css — reset, fuentes, escala tipográfica, layout y capas de fondo.
+   ========================================================================== */
+
+/* --- Fuentes (variables: un archivo cubre todos los pesos) -------------- */
+@font-face {
+  font-family: "Geist";
+  src: url("https://cdn.jsdelivr.net/npm/geist@1.7.2/dist/fonts/geist-sans/Geist-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("https://cdn.jsdelivr.net/npm/geist@1.7.2/dist/fonts/geist-mono/GeistMono-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Reset -------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+* { margin: 0; padding: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto;          /* Lenis se encarga */
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background var(--t-slow) var(--ease), color var(--t-slow) var(--ease);
+}
+
+img, picture, video, svg { display: block; max-width: 100%; height: auto; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button { background: none; border: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection { background: var(--accent); color: var(--accent-ink); }
+
+/* --- Escala tipográfica -------------------------------------------------
+   Peso 400 en el display con tracking -.03em: ese es el carácter de la
+   referencia. Subirlo a 600 lo vuelve pesado y genérico.
+   ------------------------------------------------------------------------ */
+.font-s1,
+.font-h1,
+.font-h2,
+.font-h3 {
+  font-weight: 400;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.font-s1 { font-size: 8rem;    line-height: 1;   }
+.font-h1 { font-size: 6rem;    line-height: 1;   }
+.font-h2 { font-size: 4rem;    line-height: 1.1; }
+.font-h3 { font-size: 2.5rem;  line-height: 1.2; }
+.font-h4 { font-size: 1.75rem; line-height: 1.3; font-weight: 400; letter-spacing: -.02em; }
+
+.font-body-xl { font-size: 1.5rem;   line-height: 1.4; letter-spacing: -.02em; }
+.font-body-l  { font-size: 1.25rem;  line-height: 1.5; letter-spacing: -.01em; }
+.font-body    { font-size: 1rem;     line-height: 1.6; }
+.font-body-s  { font-size: .875rem;  line-height: 1.6; }
+
+@media (max-width: 64rem) {
+  .font-s1 { font-size: 3rem;    }
+  .font-h1 { font-size: 2.5rem;  }
+  .font-h2 { font-size: 1.875rem; line-height: 1.2; }
+  .font-h3 { font-size: 1.5rem;  }
+  .font-h4 { font-size: 1.25rem; }
+  .font-body-xl { font-size: 1.125rem; }
+  .font-body-l  { font-size: 1rem; }
+}
+
+/* --- Caption mono con bullet — firma visual de la referencia ------------ */
+.caption {
+  display: inline-flex;
+  align-items: center;
+  gap: .625rem;
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: max(12px, .875rem);
+  letter-spacing: -.02em;
+  line-height: 1;
+  color: var(--muted);
+}
+
+.caption::before {
+  content: "";
+  width: .375rem;
+  height: .375rem;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: .55;
+  flex: none;
+}
+
+.caption--plain::before { display: none; }
+
+/* --- Layout -------------------------------------------------------------- */
+.container {
+  width: calc(100% - var(--gutter) * 2);
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0 var(--grid-gap);
+}
+
+@media (max-width: 64rem) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.section { padding-block: var(--section-y); position: relative; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --- Capas de fondo: gradiente animado + glow difuminado + grano -------- */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.backdrop__gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(330deg, var(--grad-1), var(--grad-2), var(--grad-3), var(--grad-4));
+  background-size: 400% 400%;
+  animation: gradient 18s ease infinite;
+}
+
+/* El glow es el "blur" de la referencia: aparece despacio, nunca de golpe. */
+.backdrop__glow {
+  position: absolute;
+  left: 50%;
+  top: -20vh;
+  width: 90vw;
+  height: 90vh;
+  translate: -50% 0;
+  background: radial-gradient(circle at 50% 50%, var(--glow) 0%, transparent 62%);
+  filter: blur(50px);
+  opacity: 0;
+  transition: opacity 5s ease;
+}
+
+.is-ready .backdrop__glow { opacity: var(--glow-opacity); }
+
+.backdrop__noise {
+  position: absolute;
+  inset: -200%;
+  width: 500%;
+  height: 500%;
+  opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%22160%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%22.85%22%20numOctaves%3D%223%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23n)%22%2F%3E%3C%2Fsvg%3E");
+  animation: noise 1s steps(1) infinite;
+}
+
+@keyframes gradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes noise {
+  0%   { transform: translate3d(0, 9rem, 0); }
+  10%  { transform: translate3d(-1rem, -4rem, 0); }
+  20%  { transform: translate3d(-8rem, 2rem, 0); }
+  30%  { transform: translate3d(9rem, -9rem, 0); }
+  40%  { transform: translate3d(-2rem, 7rem, 0); }
+  50%  { transform: translate3d(-9rem, -4rem, 0); }
+  60%  { transform: translate3d(2rem, 6rem, 0); }
+  70%  { transform: translate3d(7rem, -8rem, 0); }
+  80%  { transform: translate3d(-9rem, 1rem, 0); }
+  90%  { transform: translate3d(6rem, -5rem, 0); }
+  100% { transform: translate3d(-7rem, 0, 0); }
+}
+
+/* --- Revelado de líneas con máscara -------------------------------------
+   El margin negativo compensado con padding evita que overflow:hidden
+   recorte descendentes (g, y, p) y acentos (á, ñ).
+   ------------------------------------------------------------------------ */
+.line-mask {
+  overflow: hidden;
+  margin-block: -.625rem;
+  padding-block: .625rem;
+}
+
+/* Estado inicial de los bloques que entran con fade-up. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--t-slow) var(--ease), transform .8s var(--ease);
+}
+
+/* --- Accesibilidad: sin movimiento --------------------------------------
+   Guarda real: desactiva fondo, grano, parallax y revelados.
+   ------------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .backdrop__noise,
+  .backdrop__gradient { animation: none; }
+  .backdrop__glow { opacity: var(--glow-opacity); transition: none; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .line-mask { overflow: visible; }
+}

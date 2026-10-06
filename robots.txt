@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# No aporta nada al buscador y expone la ficha RUC.
+Disallow: /assets/docs/
+
+Sitemap: https://mimesoft.site/sitemap.xml

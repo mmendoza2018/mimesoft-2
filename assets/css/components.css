@@ -1,0 +1,365 @@
+/* ==========================================================================
+   components.css — piezas reutilizables: botones, tarjetas, header,
+   preloader, barra CTA fija, marquee.
+   ========================================================================== */
+
+/* --- Botones -------------------------------------------------------------
+   La flecha ↗ va en TODOS los enlaces y botones: es una firma de la
+   referencia. Se dibuja con ::after para no ensuciar el HTML.
+   ------------------------------------------------------------------------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: .625rem;
+  padding: 1.375rem 2rem;              /* 22/32px @16 */
+  border-radius: var(--radius-btn);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 1.25rem;
+  letter-spacing: -.02em;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background var(--t-fast) var(--ease),
+              color var(--t-fast) var(--ease),
+              scale var(--t-fast) var(--ease);
+}
+
+.button::after {
+  content: "";
+  width: .75em;
+  height: .75em;
+  flex: none;
+  background: currentColor;
+  -webkit-mask: var(--arrow) center / contain no-repeat;
+          mask: var(--arrow) center / contain no-repeat;
+  transition: translate var(--t-fast) var(--ease);
+}
+
+:root { --arrow: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20d%3D%22M2%2010L10%202M10%202H3.5M10%202V8.5%22%20stroke%3D%22black%22%20stroke-width%3D%221.6%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E"); }
+
+.button:hover { scale: 1.02; }
+.button:hover::after { translate: .15em -.15em; }
+
+.button--small { padding: .75rem 1.125rem; font-size: .9375rem; border-radius: var(--radius-pill); }
+
+/* La ÚNICA pieza con color de todo el sitio. Se aplica sólo a los CTA que
+   abren un chat: ahí el verde identifica el canal, no decora. */
+.button--wa { background: var(--wa); color: var(--wa-ink); }
+.button--wa:hover { background: color-mix(in srgb, var(--wa) 88%, #fff); }
+
+.button--ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+}
+.button--ghost:hover { background: var(--surface-2); }
+
+.button--on-panel { background: var(--panel-ink); color: var(--panel); }
+
+/* Enlace de texto con flecha. */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--accent);
+  letter-spacing: -.01em;
+  transition: opacity var(--t-fast) var(--ease);
+}
+.link::after {
+  content: "";
+  width: .7em; height: .7em;
+  background: currentColor;
+  -webkit-mask: var(--arrow) center / contain no-repeat;
+          mask: var(--arrow) center / contain no-repeat;
+  transition: translate var(--t-fast) var(--ease);
+}
+.link:hover::after { translate: .15em -.15em; }
+
+/* --- Panel sólido a sangre ----------------------------------------------
+   El bloque de color con radius grande que estructura la página en la
+   referencia. Se usa para "Qué hacemos" y el footer.
+   ------------------------------------------------------------------------- */
+.panel {
+  border-radius: var(--radius-panel);
+  background: var(--panel);
+  color: var(--panel-ink);
+  padding: 5rem;
+  overflow: hidden;
+}
+
+.panel--alt { background: var(--panel-alt); color: var(--panel-alt-ink); }
+
+.panel .caption { color: color-mix(in srgb, currentColor 70%, transparent); }
+.panel .caption::before { background: currentColor; }
+
+@media (max-width: 64rem) {
+  .panel { padding: 2.5rem 1.5rem; }
+}
+
+/* --- Tarjetas ------------------------------------------------------------ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 2.625rem;                   /* 42px @16 */
+  transition: border-color var(--t-fast) var(--ease),
+              background var(--t-fast) var(--ease);
+}
+
+.card:hover { border-color: var(--line-strong); }
+
+/* Chip mono para listar stack. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: .3125rem .625rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: .75rem;
+  letter-spacing: -.02em;
+  line-height: 1;
+  color: var(--muted);
+}
+
+/* --- Header -------------------------------------------------------------
+   Colapsa a sólo el isotipo al scrollear, como la referencia.
+   ------------------------------------------------------------------------- */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: var(--z-header);
+  padding: 1.5rem 0;
+  transition: translate var(--t-med) var(--ease),
+              padding var(--t-med) var(--ease),
+              background var(--t-med) var(--ease);
+}
+
+/* Al bajar se recoge; al subir vuelve. Así la pantalla queda limpia para
+   leer sin que el usuario pierda la navegación. */
+.header.is-hidden { translate: 0 -100%; }
+
+.header.is-stuck {
+  padding: .75rem 0;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.header__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: .625rem;
+  color: var(--text);
+  flex: none;
+}
+
+/* El logotipo original es negro sobre transparente. En vez de guardar dos
+   versiones o invertirlo con un filtro, se usa como MÁSCARA sobre
+   currentColor: así sale blanco en tema oscuro y negro en claro, con el
+   trazo exacto del archivo. */
+.logo {
+  display: block;
+  width: 2.25rem;
+  height: 1.5rem;
+  flex: none;
+  background: currentColor;
+  -webkit-mask: url("../img/general/mimesoft1.png") center / contain no-repeat;
+          mask: url("../img/general/mimesoft1.png") center / contain no-repeat;
+}
+
+.logo--xl { width: 6rem; height: 4rem; }
+
+.logo__word {
+  font-size: 1.0625rem;
+  letter-spacing: -.03em;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  transition: opacity var(--t-med) var(--ease), visibility var(--t-med);
+}
+
+.header__nav a {
+  font-size: .9375rem;
+  letter-spacing: -.01em;
+  color: var(--muted);
+  transition: color var(--t-fast) var(--ease);
+}
+.header__nav a:hover { color: var(--text); }
+
+.header__actions { display: flex; align-items: center; gap: .75rem; }
+
+.theme-toggle {
+  width: 2.25rem; height: 2.25rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  color: var(--text);
+  transition: background var(--t-fast) var(--ease), rotate var(--t-med) var(--ease);
+}
+.theme-toggle:hover { background: var(--surface-2); rotate: 20deg; }
+.theme-toggle svg { width: 1rem; height: 1rem; }
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  font-family: "Geist Mono", monospace;
+  font-size: .75rem;
+  letter-spacing: -.02em;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.lang-toggle button {
+  padding: .5rem .625rem;
+  color: var(--muted);
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.lang-toggle button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+
+/* Menú móvil. */
+.header__burger { display: none; width: 2.25rem; height: 2.25rem; place-items: center; }
+.header__burger span {
+  display: block; width: 1.125rem; height: 1px; background: currentColor;
+  position: relative; transition: background var(--t-fast);
+}
+.header__burger span::before,
+.header__burger span::after {
+  content: ""; position: absolute; left: 0; width: 100%; height: 1px; background: var(--text);
+  transition: translate var(--t-fast) var(--ease), rotate var(--t-fast) var(--ease);
+}
+.header__burger span::before { translate: 0 -5px; }
+.header__burger span::after  { translate: 0 5px; }
+
+@media (max-width: 64rem) {
+  .header__burger { display: grid; }
+  .header__nav {
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    background: var(--bg);
+    opacity: 0; visibility: hidden;
+  }
+  .header__nav a { font-size: 1.5rem; color: var(--text); }
+  body.nav-open .header__nav { opacity: 1; visibility: visible; }
+  body.nav-open .header__burger span { background: transparent; }
+  body.nav-open .header__burger span::before { translate: 0 0; rotate: 45deg; }
+  body.nav-open .header__burger span::after  { translate: 0 0; rotate: -45deg; }
+  .header__actions .button { display: none; }
+}
+
+/* --- Barra CTA fija ------------------------------------------------------ */
+.cta-bar {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  translate: -50% 0;
+  z-index: var(--z-cta);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .5rem .5rem .5rem 1.5rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  border: 1px solid var(--line-strong);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: .9375rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(1rem);
+  transition: opacity var(--t-med) var(--ease),
+              transform var(--t-med) var(--ease),
+              visibility var(--t-med);
+}
+
+.cta-bar.is-visible { opacity: 1; visibility: visible; transform: none; }
+
+@media (max-width: 64rem) {
+  .cta-bar { width: calc(100% - 2rem); justify-content: space-between; padding-left: 1rem; }
+  .cta-bar__text { font-size: .8125rem; }
+}
+
+/* --- Marquee -------------------------------------------------------------
+   5 copias + translate -20% = loop sin costura.
+   ------------------------------------------------------------------------- */
+.marquee { overflow: hidden; width: 100%; }
+
+.marquee__track {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: max-content;
+  animation: marquee 24s linear infinite;
+}
+
+.marquee:hover .marquee__track { animation-play-state: paused; }
+
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  white-space: nowrap;
+}
+
+.marquee__item::after {
+  content: "";
+  width: .5em; height: .5em;
+  background: currentColor;
+  -webkit-mask: var(--arrow) center / contain no-repeat;
+          mask: var(--arrow) center / contain no-repeat;
+}
+
+@keyframes marquee {
+  0%   { translate: 0 0; }
+  100% { translate: -20% 0; }
+}
+
+/* --- Preloader ----------------------------------------------------------- */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-preloader);
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  clip-path: inset(0 0 0 0);
+}
+
+.preloader__mark { overflow: hidden; }
+.preloader__mark { color: var(--text); }
+
+.preloader__count {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 3rem;
+  font-family: "Geist Mono", monospace;
+  font-size: .875rem;
+  letter-spacing: -.02em;
+  color: var(--muted);
+}
+
+.preloader__bar {
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 1px;
+  width: 100%;
+  transform-origin: left center;
+  scale: 0 1;
+  background: var(--accent);
+}
+
+/* Si el JS no arranca, el preloader no debe dejar la página en negro. */
+.no-js .preloader { display: none; }
